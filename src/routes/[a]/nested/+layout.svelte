@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { get } from "$lib/context";
 
-	const fooDerived = $derived(await get().current);
+	const fooDerived = $derived(get().current);
 
 	let { children } = $props();
 </script>
 
-{fooDerived.foo}
+{fooDerived?.foo ?? 'fallback'}
 
 {@render children()}

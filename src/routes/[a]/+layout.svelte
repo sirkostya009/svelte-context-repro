@@ -1,14 +1,18 @@
 <script lang="ts">
-	import { set } from "$lib/context";
+	import { set, type type } from "$lib/context";
 
 	let { children, params } = $props();
 
-	const fooState = $derived(import(`$lib/${params.a}.ts`));
+	let fooState = $state<type>();
 
 	set({
 		get current() {
 			return fooState;
 		},
+	});
+
+	$effect(() => {
+		import(`$lib/${params.a}.ts`).then((m) => (fooState = m));
 	});
 </script>
 
