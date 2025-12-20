@@ -3,11 +3,13 @@
 
 	let { children, params } = $props();
 
-	const fooState = $derived({
-		current: import(`$lib/${params.a}.ts`),
-	});
+	const fooState = $derived(import(`$lib/${params.a}.ts`));
 
-	set(fooState);
+	set({
+		get current() {
+			return fooState;
+		},
+	});
 </script>
 
 {@render children()}
