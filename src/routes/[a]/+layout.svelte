@@ -3,7 +3,7 @@
 
 	let { children, params } = $props();
 
-	const fooState = $derived(import(`$lib/${params.a}.ts`));
+	const fooState = $derived(import(`$lib/${params.a}.ts`).then((m) => m.default));
 
 	set({
 		get current() {
