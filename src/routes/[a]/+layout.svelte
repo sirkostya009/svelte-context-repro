@@ -3,13 +3,10 @@
 
 	let { children, params } = $props();
 
-	const fooState = $derived(import(`$lib/${params.a}.ts`));
+	const fooState = $derived(await import(`$lib/${params.a}.ts`).then((m) => m.default));
 
-	set({
-		get current() {
-			return fooState;
-		},
-	});
+	// svelte-ignore state_referenced_locally
+	set(fooState);
 </script>
 
 {@render children()}
